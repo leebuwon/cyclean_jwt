@@ -8,6 +8,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/account")
@@ -42,9 +44,17 @@ public class AccountController {
         return "회원 가입 완료";
     }
 
+    // user 권한을 가진 사용자가 들어갈 수 있은 시범용
     @GetMapping("api/user")
     @ResponseBody
     public String user(){
+        // user 확인용
         return "user 권한이 있습니다.";
+    }
+
+    // 정보가 잘 저장되었는지 확인하는 시범용
+    @GetMapping("/users")
+    public List<User> users() {
+        return userRepository.findAll();
     }
 }
